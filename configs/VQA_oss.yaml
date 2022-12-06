@@ -1,0 +1,36 @@
+train_file: ['data/vqa_ocr/vqa_train_ocr.json',
+             'data/vqa_ocr/vqa_nominival_ocr.json',   
+             'data/vg_qa.json']
+val_file: ['data/vqa_ocr/vqa_minival_ocr.json']            
+test_file: ['data/vqa_ocr/vqa_test_ocr.json']
+label_file: ['data/vqa_ocr/minival.json']
+answer_list: 'data/answer_list.json'
+
+read_local_data: True
+vqa_root: '/home/public/sandbox/mm_feature/coco_2014/'
+vg_root: '/home/public/sandbox/mm_feature/visual_genome/'
+mid_cross: False
+
+bert_config: 'configs/config_bert.json'
+
+image_res: 384
+batch_size_train: 32 
+batch_size_test: 16 
+k_test: 128
+
+alpha: 0.4
+distill: True
+warm_up: True
+
+eos: '[SEP]'
+
+
+optimizer: {opt: adamW, lr: 2e-5, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 2e-5, epochs: 8, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-5, warmup_epochs: 4, cooldown_epochs: 0}
+
+
+
+
+
+
+

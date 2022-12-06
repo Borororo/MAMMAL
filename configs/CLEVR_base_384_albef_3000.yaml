@@ -1,0 +1,90 @@
+train_imdb_file: "/nas-alinlp/lcl193798/data_renm/CLEVR/CLEVR_v1.0/imdb/imdb_train.npy"
+val_imdb_file: "/nas-alinlp/lcl193798/data_renm/CLEVR/CLEVR_v1.0/imdb/imdb_val.npy"
+test_imdb_file: "/nas-alinlp/lcl193798/data_renm/CLEVR/CLEVR_v1.0/imdb/imdb_test.npy"
+
+vocab_question_file: "/nas-alinlp/lcl193798/data_renm/CLEVR/CLEVR_v1.0/vocabulary_clevr.txt"
+vocab_answer_file: '/nas-alinlp/lcl193798/albef/data/answer_list.json'
+vocab_layout_file: "/nas-alinlp/lcl193798/data_renm/CLEVR/CLEVR_v1.0/vocabulary_layout.txt"
+
+
+read_local_data: True
+#vqa_root: '/home/public/sandbox/mm_feature/coco_2014/'
+#vg_root: '/home/public/sandbox/mm_feature/visual_genome/'
+vqa_root: '/nas-alinlp/lcl193798/mm_feature/coco_2014/'
+vg_root: '/nas-alinlp/lcl193798/mm_feature/visual_genome/'
+gqa_root: '/nas-alinlp/lcl193798/mm_feature/'
+mid_cross: True
+
+
+
+# image_res: 384
+# batch_size_train: 32
+# batch_size_test: 32 
+# k_test: 128
+
+# alpha: 0.4
+# distill: False
+# warm_up: True
+
+bert_config: 'configs/config_bert.json'
+
+
+batch_size_train: 32
+vision_width: 768
+distill: False
+#image_res: 576
+#batch_size_train: 8 
+batch_size_test: 16 
+k_test: 5
+
+alpha: 0.4
+warm_up: True
+
+eos: '[SEP]'
+clip_name: "ViT-B-16"
+
+# optimizer: {opt: adamW, lr1: 2e-5, lr2: 5e-6, lr3: 1e-3, weight_decay: 0.02}
+# schedular: {sched: cosine, lr: 2e-5, epochs: 8, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-5, warmup_epochs: 4, cooldown_epochs: 0}
+
+# optimizer: {opt: adamW, lr1: 5e-5, lr2: 5e-5, lr3: 1e-3, weight_decay: 0.02}
+# schedular: {sched: cosine, lr: 5e-5, epochs: 10, min_lr: 1e-6, decay_rate: 1, warmup_lr: 5e-5, warmup_epochs: 1, cooldown_epochs: 0}
+
+optimizer: {opt: adamW, lr: 1e-6, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 1e-6, epochs: 10, min_lr: 1e-7, decay_rate: 1, warmup_lr: 5e-5, warmup_epochs: 0, cooldown_epochs: 0}
+
+
+
+noop_idx: 0
+stack_length: 8
+image_res: 384
+h_feature: 24
+w_feature: 24
+replace_fusion: False
+hidden_dropout_prob: 0.1
+answer_vocab_size: 3128
+layout_vocab_size: 9
+internal_dim: 768
+controller_nodes: 9
+module_names: ['_NoOp',
+             '_Find',   
+             '_Transform',
+             '_Filter',
+             '_And',
+             "_Or",
+             "_Scene",
+             "_DescribeOne",
+             "_DescribeTwo"
+             ]
+
+guard_stack_ptr: True
+keep_describe_stack: True
+validate_module: False
+use_hard_sharpen_ptr: False
+soft_sharpen_temp_prt: 0.2
+
+vqa_loss_weight: 1.0
+layout_loss_weight: 1.0
+use_gt_layout: False
+
+
+
